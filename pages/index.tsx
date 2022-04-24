@@ -2,7 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React from 'react';
-import useQueryValues from '../hooks/useQueryValues';
+import useQueryState from '../hooks/useQueryState';
 
 type Values = {
   username: string;
@@ -16,10 +16,7 @@ const initialValues: Values = {
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const [values, setValues] = useQueryValues({
-    initialState: initialValues,
-    requieredKeys: ['username', 'comment'],
-  });
+  const [values, setValues] = useQueryState(initialValues);
 
   const handleChange = (e: React.ChangeEvent<any>) => {
     setValues((prevValues) => ({ ...prevValues, [e.target.name]: e.target.value }));
